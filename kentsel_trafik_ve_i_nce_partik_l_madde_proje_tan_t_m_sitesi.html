@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kentsel Trafik ve İnce Partikül Madde | Kavramsal Erken Uyarı Cihazı</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f8fb;
+    --text: #1c2a3a;
+    --muted: #55626f;
+    --navy: #14294a;
+    --green: #2e7d4f;
+    --green-soft: #e3f0e8;
+    --line: #dfe6ee;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Üst Gezinme Çubuğu */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--navy);
+    color: #ffffff;
+  }
+
+  .bar {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .bar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 14px;
+  }
+
+  .bar nav a {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .bar nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .lang {
+    display: inline-flex;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .lang button {
+    background: transparent;
+    color: #ffffff;
+    border: 0;
+    padding: 5px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .lang button[aria-pressed="true"] {
+    background: #ffffff;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  main {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px 56px;
+  }
+
+  .hero {
+    padding: 40px 0 18px;
+  }
+
+  h1 {
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.2;
+    margin: 0 0 14px;
+    color: var(--navy);
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 0 0 14px;
+    color: var(--navy);
+  }
+
+  h3 {
+    font-size: 17px;
+    margin: 22px 0 8px;
+    color: var(--green);
+  }
+
+  section {
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  .lead {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 880px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 740px) {
+    .grid.two {
+      grid-template-columns: 1fr 1fr;
+    }
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .card p {
+    margin: 0 0 10px;
+    font-size: 15px;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .svg-frame {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .pill {
+    display: inline-block;
+    background: var(--green-soft);
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 11px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  ol.steps {
+    padding-left: 22px;
+    margin: 0;
+  }
+
+  ol.steps li {
+    margin-bottom: 10px;
+  }
+
+  .levels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .level {
+    flex: 1 1 220px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .placeholder {
+    background: #ffffff;
+    border: 1px dashed #9aa6b4;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  th {
+    color: var(--muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background: var(--surface);
+  }
+
+  a {
+    color: var(--green);
+  }
+
+  /* Etkileşimli Kamera & El ile Cihaz Keşfi Bölümü (index 13 uyarlaması) */
+  .explorer-layout {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+  }
+
+  @media (min-width: 920px) {
+    .explorer-layout {
+      grid-template-columns: 1.65fr 1fr;
+    }
+  }
+
+  .stage-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #0d1624;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  #canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+  }
+
+  #video {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+
+  .status {
+    font-size: 14px;
+    color: var(--muted);
+    flex: 1 1 220px;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  button.primary {
+    background: var(--navy);
+    color: #ffffff;
+    border: 0;
+    border-radius: 10px;
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+  }
+
+  button.primary:hover:not(:disabled) {
+    transform: scale(1.02);
+  }
+
+  button.primary:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  button.primary:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 2px;
+  }
+
+  button.secondary {
+    background: #ffffff;
+    color: var(--navy);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  button.secondary:hover:not(:disabled) {
+    border-color: var(--navy);
+  }
+
+  button.secondary:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    align-self: start;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .panel.open {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px var(--green-soft);
+  }
+
+  .panel h3.panel-heading {
+    margin: 0 0 8px;
+    font-size: 23px;
+    color: var(--navy);
+  }
+
+  .panel .tag {
+    display: inline-block;
+    background: var(--green-soft);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .panel p {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .panel ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+    font-size: 15.5px;
+  }
+
+  .panel li {
+    margin-bottom: 6px;
+  }
+
+  .hint {
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
+
+  .privacy {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  .empty {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .pinned-tag {
+    color: var(--green);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* Dil geçişi görünürlüğü */
+  span[data-lang] {
+    display: none;
+  }
+
+  div[data-lang] {
+    display: none;
+  }
+
+  html[lang="tr"] span[data-lang="tr"],
+  html[lang="en"] span[data-lang="en"] {
+    display: inline;
+    animation: langIn 0.35s ease both;
+  }
+
+  html[lang="tr"] div[data-lang="tr"],
+  html[lang="en"] div[data-lang="en"] {
+    display: block;
+    animation: langIn 0.35s ease both;
+  }
+
+  @keyframes langIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sunum (slayt) bölümü */
+  .deck {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .slide-stage {
+    position: relative;
+    min-height: 290px;
+  }
+
+  .slide {
+    display: none;
+    padding: 32px 28px;
+    min-height: 290px;
+    animation: slideIn 0.35s ease both;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .slide .num {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .slide h3 {
+    font-size: 22px;
+    color: var(--navy);
+    margin: 6px 0 12px;
+  }
+
+  .slide ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .slide li {
+    margin-bottom: 8px;
+  }
+
+  .deck-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+    background: #ffffff;
+  }
+
+  .deck-controls button.slide-btn {
+    background: var(--navy);
+    color: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    min-height: 44px;
+    min-width: 96px;
+    padding: 0 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .deck-controls button.slide-btn:hover {
+    transform: scale(1.03);
+  }
+
+  .deck-controls button.slide-btn:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 2px;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dots button {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--line);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .dots button[aria-current="true"] {
+    background: var(--green);
+  }
+
+  .counter {
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  footer {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media print {
+    header, .deck-controls, .toolbar { display: none; }
+    .slide { display: block !important; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <nav aria-label="Bölümler">
+      <a href="#proje"><span data-lang="tr">Proje</span><span data-lang="en">Project</span></a>
+      <a href="#yontem"><span data-lang="tr">Yöntem</span><span data-lang="en">Method</span></a>
+      <a href="#bulgular"><span data-lang="tr">Bulgular</span><span data-lang="en">Findings</span></a>
+      <a href="#cihaz"><span data-lang="tr">Cihaz &amp; Kamera Keşfi</span><span data-lang="en">Device &amp; Hand Explorer</span></a>
+      <a href="#sunum"><span data-lang="tr">Sunum</span><span data-lang="en">Presentation</span></a>
+      <a href="#kaynak"><span data-lang="tr">Kaynaklar</span><span data-lang="en">Sources</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="btn-tr" aria-pressed="true">Türkçe</button>
+      <button type="button" id="btn-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- GİRİŞ -->
+  <div class="hero">
+    <span class="pill">
+      <span data-lang="tr">Kavramsal proje · TÜBİTAK 2204-A Taslak</span>
+      <span data-lang="en">Conceptual project · TÜBİTAK 2204-A Draft</span>
+    </span>
+    <h1>
+      <span data-lang="tr">Kentsel Trafik ve İnce Partikül Madde: Kavramsal Erken Uyarı Cihazı</span>
+      <span data-lang="en">Urban Traffic and Fine Particulate Matter: A Conceptual Early Warning Device</span>
+    </h1>
+    <p class="lead">
+      <span data-lang="tr">Bu proje, yoğun trafik saatlerinde hava kirliliğinin gerçekten arttığını bir kentsel istasyonun verileriyle test etmeyi ve elde edilecek bulgulara dayanarak kavramsal bir erken uyarı cihazı tasarlamayı amaçlıyor. Projede fiziksel bir prototip yapılmamıştır; cihaz yalnızca kavramsal olarak tasarlanmıştır.</span>
+      <span data-lang="en">This project aims to test, with data from an urban monitoring station, whether air pollution really rises during peak traffic hours, and to design a conceptual early warning device based on the findings. No physical prototype has been built; the device is designed purely at the conceptual level.</span>
+    </p>
+  </div>
+
+  <!-- PROJE GENEL BAKIŞ -->
+  <section id="proje">
+    <div class="grid two">
+      <figure>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 380" width="100%" role="img" aria-label="Trafiğin yoğun olduğu bir caddede hava kalitesi ölçüm istasyonu">
+            <rect width="640" height="380" fill="#eef3f8"/>
+            <!-- Arka Plan Şehir Silüeti -->
+            <rect x="24" y="70" width="74" height="190" rx="4" fill="#d4dee9"/>
+            <rect x="112" y="42" width="88" height="218" rx="4" fill="#c3d1e0"/>
+            <rect x="216" y="92" width="68" height="168" rx="4" fill="#d4dee9"/>
+            <rect x="304" y="56" width="96" height="204" rx="4" fill="#cbd7e4"/>
+            <rect x="416" y="84" width="70" height="176" rx="4" fill="#d4dee9"/>
+            <!-- Yol ve Şerit Çizgileri -->
+            <rect x="0" y="258" width="640" height="78" fill="#465466"/>
+            <line x1="20" y1="297" x2="95" y2="297" stroke="#ffffff" stroke-width="4" stroke-dasharray="28 24" opacity="0.65"/>
+            <line x1="150" y1="297" x2="275" y2="297" stroke="#ffffff" stroke-width="4" stroke-dasharray="28 24" opacity="0.65"/>
+            <rect x="0" y="336" width="640" height="44" fill="#cfd8e3"/>
+            <!-- Trafik Araçları -->
+            <g transform="translate(46,266)">
+              <rect x="0" y="16" width="108" height="30" rx="7" fill="#14294a"/>
+              <path d="M20 16 L34 2 L78 2 L92 16 Z" fill="#214070"/>
+              <circle cx="24" cy="46" r="8.5" fill="#1c2a3a"/>
+              <circle cx="84" cy="46" r="8.5" fill="#1c2a3a"/>
+            </g>
+            <g transform="translate(196,262)">
+              <rect x="0" y="18" width="124" height="32" rx="8" fill="#ffffff" stroke="#8b9bb0" stroke-width="2"/>
+              <path d="M24 18 L40 3 L88 3 L104 18 Z" fill="#dce5ef"/>
+              <circle cx="28" cy="50" r="9" fill="#1c2a3a"/>
+              <circle cx="96" cy="50" r="9" fill="#1c2a3a"/>
+            </g>
+            <!-- Kaldırım Korkuluğu -->
+            <line x1="0" y1="322" x2="640" y2="322" stroke="#2c3a4b" stroke-width="4"/>
+            <line x1="0" y1="333" x2="640" y2="333" stroke="#2c3a4b" stroke-width="3"/>
+            <!-- Yol Kenarı Hava Kalitesi Ölçüm İstasyonu -->
+            <rect x="506" y="88" width="14" height="274" fill="#99a8b8"/>
+            <rect x="486" y="54" width="54" height="38" rx="8" fill="#ffffff" stroke="#14294a" stroke-width="2.5"/>
+            <line x1="486" y1="68" x2="540" y2="68" stroke="#14294a" stroke-width="2"/>
+            <line x1="486" y1="79" x2="540" y2="79" stroke="#14294a" stroke-width="2"/>
+            <!-- İstasyon Anteni -->
+            <line x1="554" y1="168" x2="554" y2="98" stroke="#14294a" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M540 112 Q554 96 568 112" fill="none" stroke="#2e7d4f" stroke-width="2.5"/>
+            <path d="M533 102 Q554 80 575 102" fill="none" stroke="#2e7d4f" stroke-width="2.5"/>
+            <!-- İstasyon Kontrol Kutusu -->
+            <rect x="462" y="168" width="104" height="114" rx="10" fill="#ffffff" stroke="#14294a" stroke-width="3"/>
+            <circle cx="548" cy="225" r="5.5" fill="#14294a"/>
+            <circle cx="484" cy="190" r="6" fill="#2e7d4f"/>
+            <!-- İnce Partikül Noktaları -->
+            <circle cx="385" cy="136" r="3.5" fill="#55626f" opacity="0.45"/>
+            <circle cx="418" cy="116" r="4" fill="#55626f" opacity="0.35"/>
+            <circle cx="364" cy="172" r="3" fill="#55626f" opacity="0.5"/>
+            <circle cx="436" cy="154" r="3.5" fill="#2e7d4f" opacity="0.65"/>
+          </svg>
+        </div>
+        <figcaption>
+          <span data-lang="tr">Temsili görsel: trafiğin yoğun olduğu bir caddede hava kalitesi ölçüm istasyonu. Gerçek bir ölçüm noktasını göstermez.</span>
+          <span data-lang="en">Illustrative graphic: an air quality monitoring station on a busy street. Does not depict a real measurement point.</span>
+        </figcaption>
+      </figure>
+
+      <div class="card" style="align-self:center;">
+        <h3 style="margin-top:0;"><span data-lang="tr">Araştırma sorusu</span><span data-lang="en">Research question</span></h3>
+        <p>
+          <span data-lang="tr">Yoğun trafik saatlerinde PM2.5 ve PM10 değerleri sakin saatlere göre anlamlı biçimde yüksek mi?</span>
+          <span data-lang="en">Are PM2.5 and PM10 levels significantly higher during peak traffic hours than during quiet hours?</span>
+        </p>
+        <h3><span data-lang="tr">Veri kaynağı</span><span data-lang="en">Data source</span></h3>
+        <p>
+          <span data-lang="tr">Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'nın kamuya açık Ulusal Hava Kalitesi İzleme Ağı (havaizleme.gov.tr) saatlik ölçümleri.</span>
+          <span data-lang="en">Hourly measurements from the public National Air Quality Monitoring Network of Türkiye's Ministry of Environment, Urbanisation and Climate Change (havaizleme.gov.tr).</span>
+        </p>
+        <h3><span data-lang="tr">Alan bilgisi</span><span data-lang="en">Project scope</span></h3>
+        <p>
+          <span data-lang="tr">Ana alan: Çevre ve Çevreyi Koruma · Tematik alan: Sürdürülebilir Şehirler ve Toplumlar</span>
+          <span data-lang="en">Main field: Environment and Environmental Protection · Thematic area: Sustainable Cities and Communities</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM, HİPOTEZ VE LİTERATÜR -->
+  <section>
+    <h2><span data-lang="tr">Neden bu proje?</span><span data-lang="en">Why this project?</span></h2>
+    <p>
+      <span data-lang="tr">Kentlerde araç trafiği, ince partikül maddenin (PM2.5 ve PM10) önemli kaynaklarından biridir. Bu partiküller solunum yolunu ve kalp-damar sistemini etkileyebildiği için halk sağlığı açısından önemlidir. Egzoz gazları ve lastik-fren aşınması gibi kaynaklar, yoğun trafik saatlerinde havaya daha fazla partikül salabilir.</span>
+      <span data-lang="en">In cities, road traffic is one of the main sources of fine particulate matter (PM2.5 and PM10). Because these particles can affect the respiratory and cardiovascular systems, they matter for public health. Exhaust gases and wear from tires and brakes can add more particles to the air during heavy traffic hours.</span>
+    </p>
+    <p>
+      <span data-lang="tr">Ancak belirli bir ilçede ya da caddede, trafiğin yoğun olduğu saatlerle sakin saatler arasında kirlilik düzeyinin ne kadar değiştiği her zaman açık değildir. Bu proje tam olarak bu boşluğa odaklanır. Ayrıca, mevcut ölçüm istasyonlarının sınırlı olması nedeniyle, daha ucuz ve yerel bir uyarı sistemine duyulan ihtiyaç da tartışılmaktadır.</span>
+      <span data-lang="en">However, it is not always clear how much pollution levels change between heavy and quiet traffic hours in a specific district or street. This project focuses on exactly this gap. Because monitoring stations are limited in number, the need for a cheaper, local warning system is also worth discussing.</span>
+    </p>
+    <div class="card">
+      <p>
+        <strong><span data-lang="tr">Hipotez:</span><span data-lang="en">Hypothesis:</span></strong>
+        <span data-lang="tr"> Yoğun trafik saatlerinde (sabah 07:30-09:30 ve akşam 17:30-19:30) PM2.5 ve PM10 ortalama değerleri, sakin saatlere (gece 01:00-04:00) göre anlamlı biçimde yüksektir.</span>
+        <span data-lang="en"> During peak traffic hours (07:30-09:30 in the morning and 17:30-19:30 in the evening), average PM2.5 and PM10 values are significantly higher than during quiet hours (01:00-04:00 at night).</span>
+      </p>
+    </div>
+
+    <h3><span data-lang="tr">Literatür özeti</span><span data-lang="en">Literature summary</span></h3>
+    <div class="grid three">
+      <div class="card">
+        <p><strong>ABD Çevre Koruma Ajansı (EPA)</strong></p>
+        <p>
+          <span data-lang="tr">Kuzey Carolina çalışmasında trafik yoğunluğu ile PM2.5 arasında orta düzeyde bir ilişki bildirilmektedir.</span>
+          <span data-lang="en">The North Carolina study reports a moderate relationship between traffic density and PM2.5.</span>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>Moore, Figliozzi &amp; Bigazzi (2014)</strong></p>
+        <p>
+          <span data-lang="tr">Kentsel bir arter yolunda trafik yoğunluğu ve hızının PM2.5 değerlerini etkilediği belirtilmektedir.</span>
+          <span data-lang="en">Indicates that traffic volume and speed on an urban arterial road affect PM2.5 concentrations.</span>
+        </p>
+      </div>
+      <div class="card">
+        <p><strong>Greenpeace Akdeniz (2023)</strong></p>
+        <p>
+          <span data-lang="tr">Bakanlık ölçüm verilerini kullanarak PM10 değerlerinin bölgesel dağılımını incelemiştir.</span>
+          <span data-lang="en">Examined the regional distribution of PM10 values using official Ministry monitoring data.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YÖNTEM -->
+  <section id="yontem">
+    <h2><span data-lang="tr">Yöntem</span><span data-lang="en">Method</span></h2>
+    <p>
+      <span data-lang="tr">Çalışma, kamuya açık verilerle ve basit istatistiksel testlerle yürütülecektir. Yöntem aşağıdaki adımlardan oluşur:</span>
+      <span data-lang="en">The study will use public data and simple statistical tests. The method consists of the following steps:</span>
+    </p>
+    <ol class="steps">
+      <li>
+        <strong><span data-lang="tr">Veri toplama:</span><span data-lang="en">Data collection:</span></strong>
+        <span data-lang="tr"> Yıllık ölçüm yeterliliği en az %75 olan bir istasyonun saatlik PM2.5 ve PM10 verileri en az üç ay boyunca alınacaktır.</span>
+        <span data-lang="en"> Hourly PM2.5 and PM10 data from a station with at least 75% annual data coverage will be collected for at least three months.</span>
+      </li>
+      <li>
+        <strong><span data-lang="tr">Veri temizliği:</span><span data-lang="en">Data cleaning:</span></strong>
+        <span data-lang="tr"> Eksik ve hatalı değerler çıkarılacak, çıkarılan kayıtların sayısı raporlanacaktır.</span>
+        <span data-lang="en"> Missing and erroneous values will be removed, and the number of removed records will be reported.</span>
+      </li>
+      <li>
+        <strong><span data-lang="tr">Zaman dilimlerinin tanımlanması:</span><span data-lang="en">Defining time windows:</span></strong>
+        <span data-lang="tr"> Yoğun saatler ve sakin saatler, veri toplanmadan önce yazılı olarak tanımlanacaktır.</span>
+        <span data-lang="en"> Peak and quiet hours will be defined in writing before data collection begins.</span>
+      </li>
+      <li>
+        <strong><span data-lang="tr">Karşılaştırma:</span><span data-lang="en">Comparison:</span></strong>
+        <span data-lang="tr"> İki grubun ortalamaları bağımsız örneklem t-testi ile karşılaştırılacaktır. Veri dağılımı uygun değilse, buna uygun bir alternatif test kullanılacaktır.</span>
+        <span data-lang="en"> The averages of the two groups will be compared with an independent samples t-test. If the data distribution is not suitable, an appropriate alternative test will be used.</span>
+      </li>
+      <li>
+        <strong><span data-lang="tr">İlişki analizi:</span><span data-lang="en">Relationship analysis:</span></strong>
+        <span data-lang="tr"> Trafik ile PM arasındaki ilişki basit doğrusal regresyonla incelenecek, rüzgâr hızı ve sıcaklığın etkisi ayrıca değerlendirilecektir.</span>
+        <span data-lang="en"> The relationship between traffic and PM will be examined with simple linear regression, and the effects of wind speed and temperature will be assessed separately.</span>
+      </li>
+    </ol>
+    <div class="placeholder" style="margin-top:14px;">
+      <span data-lang="tr">[İstasyon adı, il ve veri tarih aralığı, veri toplandıktan sonra eklenecek]</span>
+      <span data-lang="en">[Station name, province and data date range will be added after data collection]</span>
+    </div>
+  </section>
+
+  <!-- BULGULAR -->
+  <section id="bulgular">
+    <h2><span data-lang="tr">Bulgular (Taslak Tablo)</span><span data-lang="en">Findings (Draft Table)</span></h2>
+    <p>
+      <span data-lang="tr">Bu bölüm veri analizi tamamlandıktan sonra doldurulacaktır. Bulgular, hipotezin desteklenip desteklenmediğini açıkça belirtecektir.</span>
+      <span data-lang="en">This section will be filled in once the data analysis is completed. The findings will clearly state whether the hypothesis is supported.</span>
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span data-lang="tr">Ölçüm</span><span data-lang="en">Measurement</span></th>
+            <th><span data-lang="tr">Yoğun saatler (ort.)</span><span data-lang="en">Peak hours (avg.)</span></th>
+            <th><span data-lang="tr">Sakin saatler (ort.)</span><span data-lang="en">Quiet hours (avg.)</span></th>
+            <th><span data-lang="tr">Fark</span><span data-lang="en">Difference</span></th>
+            <th><span data-lang="tr">p değeri</span><span data-lang="en">p-value</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>PM2.5 (µg/m³)</strong></td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+          </tr>
+          <tr>
+            <td><strong>PM10 (µg/m³)</strong></td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+            <td>[ ]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="placeholder" style="margin-top:14px;">
+      <span data-lang="tr">[Regresyon sonucu ve grafik veri analizi tamamlanınca buraya eklenecek]</span>
+      <span data-lang="en">[Regression results and chart will be added here once data analysis is completed]</span>
+    </div>
+  </section>
+
+  <!-- CİHAZ VE KAMERA İLE ETKİLEŞİMLİ EL KEŞFİ -->
+  <section id="cihaz">
+    <h2><span data-lang="tr">Kavramsal Erken Uyarı Cihazı ve El ile Cihaz Keşfi</span><span data-lang="en">Conceptual Early Warning Device &amp; Hand Exploration</span></h2>
+    <p>
+      <span data-lang="tr">Cihazın amacı, hava kirliliği belirli bir eşiği aştığında yakın çevredekileri ve yetkilileri bilgilendirmektir. Aşağıdaki etkileşimli sahnede kamerayı açıp işaret parmağınızı bileşenlerin veya bağlantı çizgilerinin üzerine getirerek cihazın iç yapısını keşfedebilir; kamera kullanmadan fareyle de üzerine gelip tıklayarak inceleyebilirsiniz.</span>
+      <span data-lang="en">The purpose of the device is to alert nearby residents and authorities when air pollution crosses a set threshold. In the interactive stage below, turn on your camera and move your index finger over the components or connection lines to explore the device's internal structure, or inspect them directly with your mouse.</span>
+    </p>
+
+    <!-- Gömülü Kamera & MediaPipe Hands Etkileşimli Sahnesi -->
+    <div class="explorer-layout">
+      <div class="stage-col">
+        <div class="stage">
+          <video id="video" playsinline muted></video>
+          <canvas id="canvas" width="960" height="720"></canvas>
+        </div>
+        <div class="toolbar">
+          <span class="status" id="status">Kamerayı başlatmak için düğmeye basın (veya fareyle parçaların üzerine gelin).</span>
+          <div class="toolbar-actions">
+            <button class="primary" id="startBtn" type="button">
+              <span data-lang="tr">Kamerayı başlat</span>
+              <span data-lang="en">Start camera</span>
+            </button>
+            <button class="secondary" id="stopBtn" type="button" disabled>
+              <span data-lang="tr">Kamerayı durdur</span>
+              <span data-lang="en">Stop camera</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel" id="panel" aria-live="polite">
+        <span class="tag">
+          <span data-lang="tr">Kavramsal</span>
+          <span data-lang="en">Conceptual</span>
+        </span>
+        <div id="pImg" style="margin-bottom:12px;"></div>
+        <h3 class="panel-heading" id="pTitle">Bir parça seçin</h3>
+        <div id="pBody">
+          <p class="empty">Elinizi gösterin ve işaret parmağınızı bir parçanın üzerine getirin.</p>
+        </div>
+        <div class="hint">
+          <span data-lang="tr">Parçanın üstüne gelin, başparmak ve işaret parmağınızı birleştirerek kilitleyin. Parçalar arasındaki çizgilerin üstüne gelince veri ya da enerji akışı açıklanır. Avucunuzu açınca kilit kalkar.</span>
+          <span data-lang="en">Hover over a component and pinch your thumb and index finger together to lock it. Hovering over the lines between components explains the data or energy flow. Open your palm to unlock.</span>
+        </div>
+        <p class="privacy">
+          <span data-lang="tr">Kamera görüntüsü yalnızca bu cihazda işlenir, hiçbir yere gönderilmez.</span>
+          <span data-lang="en">Camera feed is processed locally on this device only and is never sent anywhere.</span>
+        </p>
+      </aside>
+    </div>
+
+    <h3><span data-lang="tr">Uyarı kademeleri</span><span data-lang="en">Warning levels</span></h3>
+    <div class="levels">
+      <div class="level">
+        <span class="dot" style="background:var(--green);"></span>
+        <strong><span data-lang="tr">Güvenli</span><span data-lang="en">Safe</span></strong><br>
+        <span data-lang="tr">Yeşil ışık, veriler standart aralıkta kaydedilir.</span>
+        <span data-lang="en">Green light, data is logged at standard intervals.</span>
+      </div>
+      <div class="level">
+        <span class="dot" style="background:#c9962a;"></span>
+        <strong><span data-lang="tr">Dikkat</span><span data-lang="en">Caution</span></strong><br>
+        <span data-lang="tr">Sarı ışık, duyarlı gruplar için bilgilendirme.</span>
+        <span data-lang="en">Yellow light, notice for sensitive groups.</span>
+      </div>
+      <div class="level">
+        <span class="dot" style="background:#b8473b;"></span>
+        <strong><span data-lang="tr">Alarm</span><span data-lang="en">Alarm</span></strong><br>
+        <span data-lang="tr">Kırmızı ışık ve sesli uyarı, yetkililere bildirim.</span>
+        <span data-lang="en">Red light and buzzer, notification to authorities.</span>
+      </div>
+    </div>
+    <div class="placeholder" style="margin-top:14px;">
+      <span data-lang="tr">[Eşik değerleri, WHO kılavuzu ve Türkiye Hava Kalitesi Değerlendirme ve Yönetimi Yönetmeliği teyit edildikten sonra yazılacaktır]</span>
+      <span data-lang="en">[Threshold values will be written after confirmation against the WHO guidelines and Türkiye's Air Quality Assessment and Management Regulation]</span>
+    </div>
+  </section>
+
+  <!-- SUNUM -->
+  <section id="sunum">
+    <h2><span data-lang="tr">Sunum</span><span data-lang="en">Presentation</span></h2>
+    <p>
+      <span data-lang="tr">Projenin özetini slayt biçiminde inceleyebilirsin. Oklara ya da ok tuşlarına basarak ilerleyebilirsin.</span>
+      <span data-lang="en">You can review a summary of the project in slide format. Use the arrows or the arrow keys to move through it.</span>
+    </p>
+
+    <div class="deck" id="deck" aria-roledescription="carousel" aria-label="Proje sunumu">
+      <div class="slide-stage">
+
+        <div class="slide active" data-slide="1">
+          <div class="num"><span data-lang="tr">1 / 7 · GİRİŞ</span><span data-lang="en">1 / 7 · INTRODUCTION</span></div>
+          <h3><span data-lang="tr">Sorun: trafik ve ince partikül</span><span data-lang="en">The problem: traffic and fine particles</span></h3>
+          <ul>
+            <li><span data-lang="tr">Trafik, şehirlerde PM2.5 ve PM10'un önemli kaynaklarından biridir.</span><span data-lang="en">Traffic is one of the main urban sources of PM2.5 and PM10.</span></li>
+            <li><span data-lang="tr">Bu partiküller solunum ve kalp-damar sağlığını etkileyebilir.</span><span data-lang="en">These particles can affect respiratory and cardiovascular health.</span></li>
+          </ul>
+        </div>
+
+        <div class="slide" data-slide="2">
+          <div class="num"><span data-lang="tr">2 / 7 · SORU</span><span data-lang="en">2 / 7 · QUESTION</span></div>
+          <h3><span data-lang="tr">Araştırma sorusu ve hipotez</span><span data-lang="en">Research question and hypothesis</span></h3>
+          <ul>
+            <li><span data-lang="tr">Soru: Yoğun saatlerde PM değerleri sakin saatlere göre anlamlı biçimde yüksek mi?</span><span data-lang="en">Question: Are PM levels significantly higher during peak hours than quiet hours?</span></li>
+            <li><span data-lang="tr">Hipotez: Evet, yoğun saatlerde değerler daha yüksektir (sabah 07:30-09:30, akşam 17:30-19:30).</span><span data-lang="en">Hypothesis: Yes, values are higher during peak hours (morning 07:30-09:30, evening 17:30-19:30).</span></li>
+          </ul>
+        </div>
+
+        <div class="slide" data-slide="3">
+          <div class="num"><span data-lang="tr">3 / 7 · YÖNTEM</span><span data-lang="en">3 / 7 · METHOD</span></div>
+          <h3><span data-lang="tr">Veri ve testler</span><span data-lang="en">Data and tests</span></h3>
+          <ul>
+            <li><span data-lang="tr">Kaynak: havaizleme.gov.tr saatlik ölçümleri, en az üç ay (%75+ yeterlilik).</span><span data-lang="en">Source: hourly measurements from havaizleme.gov.tr, at least three months (≥75% coverage).</span></li>
+            <li><span data-lang="tr">Test: bağımsız örneklem t-testi ve basit doğrusal regresyon.</span><span data-lang="en">Tests: independent samples t-test and simple linear regression.</span></li>
+          </ul>
+        </div>
+
+        <div class="slide" data-slide="4">
+          <div class="num"><span data-lang="tr">4 / 7 · BULGULAR</span><span data-lang="en">4 / 7 · FINDINGS</span></div>
+          <h3><span data-lang="tr">Sonuçlar</span><span data-lang="en">Results</span></h3>
+          <div class="placeholder">
+            <span data-lang="tr">[Veri analizi tamamlanınca yoğun ve sakin saat ortalamaları, fark ve p değeri buraya eklenecek]</span>
+            <span data-lang="en">[Once the data analysis is complete, peak and quiet hour averages, the difference and the p-value will be added here]</span>
+          </div>
+        </div>
+
+        <div class="slide" data-slide="5">
+          <div class="num"><span data-lang="tr">5 / 7 · CİHAZ</span><span data-lang="en">5 / 7 · DEVICE</span></div>
+          <h3><span data-lang="tr">Kavramsal erken uyarı cihazı</span><span data-lang="en">Conceptual early warning device</span></h3>
+          <ul>
+            <li><span data-lang="tr">PM sensörü, çevresel sensör, mikrodenetleyici, kablosuz modül ve güneş panelli batarya.</span><span data-lang="en">PM sensor, environmental sensor, microcontroller, wireless module and solar-powered battery.</span></li>
+            <li><span data-lang="tr">Prototip yapılmamıştır; yalnızca tasarım düzeyindedir.</span><span data-lang="en">No prototype has been built; it exists at the design level only.</span></li>
+          </ul>
+        </div>
+
+        <div class="slide" data-slide="6">
+          <div class="num"><span data-lang="tr">6 / 7 · UYARI</span><span data-lang="en">6 / 7 · WARNING</span></div>
+          <h3><span data-lang="tr">Üç kademeli uyarı</span><span data-lang="en">Three-level warning</span></h3>
+          <ul>
+            <li><span data-lang="tr">Güvenli: yeşil ışık.</span><span data-lang="en">Safe: green light.</span></li>
+            <li><span data-lang="tr">Dikkat: sarı ışık ve bilgilendirme.</span><span data-lang="en">Caution: yellow light and notice.</span></li>
+            <li><span data-lang="tr">Alarm: kırmızı ışık, sesli uyarı ve bildirim.</span><span data-lang="en">Alarm: red light, buzzer and notification.</span></li>
+          </ul>
+        </div>
+
+        <div class="slide" data-slide="7">
+          <div class="num"><span data-lang="tr">7 / 7 · SINIRLAR VE KAYNAKLAR</span><span data-lang="en">7 / 7 · LIMITATIONS AND SOURCES</span></div>
+          <h3><span data-lang="tr">Sınırlar</span><span data-lang="en">Limitations</span></h3>
+          <ul>
+            <li><span data-lang="tr">Tek istasyon ve üç aylık veri kullanılmıştır.</span><span data-lang="en">Only one station and three months of data are used.</span></li>
+            <li><span data-lang="tr">Trafik verisi doğrudan ölçülmemiş, saat aralıklarıyla tanımlanmıştır.</span><span data-lang="en">Traffic data is not directly measured, but defined by time intervals.</span></li>
+            <li><span data-lang="tr">Korelasyon nedensellik anlamına gelmez; her istasyonda PM2.5 ölçümü bulunmayabilir.</span><span data-lang="en">Correlation does not imply causation; not every station measures PM2.5.</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="deck-controls">
+        <button type="button" class="slide-btn" id="prevBtn" aria-label="Önceki slayt">
+          <span data-lang="tr">Geri</span><span data-lang="en">Back</span>
+        </button>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+          <div class="dots" id="dots"></div>
+          <span class="counter" id="counter">1 / 7</span>
+        </div>
+        <button type="button" class="slide-btn" id="nextBtn" aria-label="Sonraki slayt">
+          <span data-lang="tr">İleri</span><span data-lang="en">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SINIRLAR VE KAYNAKLAR -->
+  <section id="kaynak">
+    <div class="grid two">
+      <div>
+        <h2><span data-lang="tr">Sınırlar</span><span data-lang="en">Limitations</span></h2>
+        <ul style="padding-left:20px; margin:0;">
+          <li style="margin-bottom:8px;">
+            <span data-lang="tr">Tek bir istasyon ve üç aylık veri kullanılmıştır.</span>
+            <span data-lang="en">Only a single station and three months of data are used.</span>
+          </li>
+          <li style="margin-bottom:8px;">
+            <span data-lang="tr">Trafik verisi doğrudan ölçülmemiş, saat aralıklarıyla tanımlanmıştır.</span>
+            <span data-lang="en">Traffic data is not directly measured, but defined through time intervals.</span>
+          </li>
+          <li style="margin-bottom:8px;">
+            <span data-lang="tr">Bulunan ilişki nedensellik anlamına gelmez.</span>
+            <span data-lang="en">The observed relationship does not imply causation.</span>
+          </li>
+          <li>
+            <span data-lang="tr">Her istasyonda PM2.5 ölçümü bulunmayabilir.</span>
+            <span data-lang="en">Not every station may include PM2.5 measurements.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2><span data-lang="tr">Kaynaklar</span><span data-lang="en">Sources</span></h2>
+        <p style="font-size:14.5px; margin-bottom:10px;">
+          <strong>[1]</strong> <span data-lang="tr">Hava Kalitesi Bülteni (Nisan 2026): </span><span data-lang="en">Air Quality Bulletin (April 2026): </span>
+          <a href="https://webdosya.csb.gov.tr/v2/ced/2026/06/BultenRaporu_2026_Nisan-20260608133454.pdf" target="_blank" rel="noopener">PDF</a>
+        </p>
+        <p style="font-size:14.5px; margin-bottom:10px;">
+          <strong>[2]</strong> <span data-lang="tr">Ulusal Hava Kalitesi İzleme Ağı: </span><span data-lang="en">National Air Quality Monitoring Network: </span>
+          <a href="https://www.havaizleme.gov.tr" target="_blank" rel="noopener">havaizleme.gov.tr</a>
+        </p>
+        <p style="font-size:14.5px; margin-bottom:10px;">
+          <strong>[3]</strong> <span data-lang="tr">Trafik yoğunluğu ile PM2.5 ilişkisi (EPA, Kuzey Carolina): </span><span data-lang="en">Traffic density and PM2.5 relationship (EPA, North Carolina): </span>
+          <a href="https://assessments.epa.gov/risk/document/&amp;deid%3D363222" target="_blank" rel="noopener">assessments.epa.gov</a>
+        </p>
+        <p style="font-size:14.5px; margin-bottom:10px;">
+          <strong>[4]</strong> Moore, A., Figliozzi, M., Bigazzi, A. (2014). Traffic and PM2.5 on urban arterial roads:
+          <a href="https://rd.springer.com/chapter/10.1007%252F978-981-15-0644-4_106" target="_blank" rel="noopener">springer.com</a>
+        </p>
+        <p style="font-size:14.5px; margin-bottom:10px;">
+          <strong>[5]</strong> Greenpeace Akdeniz (2023 PM10 analizi):
+          <a href="https://www.greenpeace.org/static/planet4-turkey-stateless/2024/08/ea70255c-gp_195.pdf" target="_blank" rel="noopener">greenpeace.org</a>
+        </p>
+        <p style="font-size:14.5px; margin-bottom:0;">
+          <strong>[6]</strong> <span data-lang="tr">Dünya Sağlık Örgütü hava kalitesi kılavuzu: </span><span data-lang="en">World Health Organization air quality guidelines: </span>
+          <a href="https://www.who.int" target="_blank" rel="noopener">who.int</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span data-lang="tr">TÜBİTAK 2204-A Lise Öğrencileri Araştırma Projeleri Yarışması · Kavramsal Tasarım · Görseller temsili ve kavramsal materyallerdir.</span>
+  <span data-lang="en">TÜBİTAK 2204-A High School Students Research Projects Competition · Conceptual Design · Graphics are illustrative and conceptual materials.</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous"></script>
+<script>
+(function () {
+  var currentLang = 'tr';
+  var W = 960, H = 720;
+
+  var video = document.getElementById('video');
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var statusEl = document.getElementById('status');
+  var startBtn = document.getElementById('startBtn');
+  var stopBtn = document.getElementById('stopBtn');
+  var pTitle = document.getElementById('pTitle');
+  var pBody = document.getElementById('pBody');
+  var panel = document.getElementById('panel');
+
+  // El iskeleti bağlantıları (MediaPipe el noktaları)
+  var HAND_LINKS = [
+    [0,1],[1,2],[2,3],[3,4],
+    [0,5],[5,6],[6,7],[7,8],
+    [5,9],[9,10],[10,11],[11,12],
+    [9,13],[13,14],[14,15],[15,16],
+    [13,17],[17,18],[18,19],[19,20],[0,17]
+  ];
+
+  // Parçalar: x, y, w, h tuval oranıdır (0-1). İki dilli açıklamalar.
+  var PARTS = [
+    {
+      id: 'pm', x: 0.04, y: 0.10, w: 0.24, h: 0.17,
+      tr: {
+        name: 'PM sensörü',
+        info: 'PM2.5 ve PM10 değerlerini ölçer. Optik yöntem kullanılması planlanmıştır.',
+        props: ['Ölçülen: PM2.5, PM10 (µg/m³)', 'Ölçüm: optik yöntem (kavramsal)', 'Çıktı: mikrodenetleyiciye dijital veri']
+      },
+      en: {
+        name: 'PM sensor',
+        info: 'Measures PM2.5 and PM10 values. Planned to use an optical sensing method.',
+        props: ['Measured: PM2.5, PM10 (µg/m³)', 'Method: optical sensing (conceptual)', 'Output: digital data to microcontroller']
+      }
+    },
+    {
+      id: 'env', x: 0.04, y: 0.38, w: 0.24, h: 0.15,
+      tr: {
+        name: 'Çevresel sensör',
+        info: 'Ortamın nem ve sıcaklığını ölçer. Bu değerler PM sonuçlarını yorumlamaya yardımcı olur.',
+        props: ['Ölçülen: nem (%), sıcaklık (°C)', 'Amaç: kontrol değişkeni', 'Konum: kutu içinde, ısınmadan uzak']
+      },
+      en: {
+        name: 'Environmental sensor',
+        info: 'Measures ambient humidity and temperature. These values help interpret PM readings.',
+        props: ['Measured: humidity (%), temperature (°C)', 'Purpose: control variable', 'Placement: inside enclosure, away from heat']
+      }
+    },
+    {
+      id: 'mcu', x: 0.37, y: 0.30, w: 0.26, h: 0.24,
+      tr: {
+        name: 'Mikrodenetleyici',
+        info: 'Cihazın beyni. Sensörlerden gelen veriyi okur, eşik değerleriyle karşılaştırır ve uyarı kararını verir.',
+        props: ['Görev: veri okuma ve eşik karşılaştırma', 'Çıktı: LED, buzzer ve modül komutları', 'Eşik değerleri: henüz yazılmadı']
+      },
+      en: {
+        name: 'Microcontroller',
+        info: 'The brain of the device. Reads data from sensors, compares it against thresholds, and makes warning decisions.',
+        props: ['Role: data reading and threshold comparison', 'Output: LED, buzzer, and module commands', 'Thresholds: not yet finalized']
+      }
+    },
+    {
+      id: 'wifi', x: 0.71, y: 0.10, w: 0.25, h: 0.15,
+      tr: {
+        name: 'Kablosuz modül',
+        info: 'Ölçüm verisini uzaktaki bir sisteme aktarır. Anten kutunun dışında kalır.',
+        props: ['Görev: veri aktarımı', 'Bileşen: modül ve anten', 'Not: haberleşme yöntemi kavramsal']
+      },
+      en: {
+        name: 'Wireless module',
+        info: 'Transmits measurement data to a remote system. The antenna remains outside the enclosure.',
+        props: ['Role: data transmission', 'Parts: module and antenna', 'Note: communication method is conceptual']
+      }
+    },
+    {
+      id: 'led', x: 0.71, y: 0.34, w: 0.25, h: 0.13,
+      tr: {
+        name: 'Durum LED\u2019i',
+        info: 'Üç renkle durumu gösterir: yeşil güvenli, sarı dikkat, kırmızı alarm.',
+        props: ['Yeşil: güvenli', 'Sarı: dikkat', 'Kırmızı: alarm']
+      },
+      en: {
+        name: 'Status LED',
+        info: 'Displays status with three colors: green for safe, yellow for caution, red for alarm.',
+        props: ['Green: safe', 'Yellow: caution', 'Red: alarm']
+      }
+    },
+    {
+      id: 'buz', x: 0.71, y: 0.52, w: 0.25, h: 0.13,
+      tr: {
+        name: 'Buzzer',
+        info: 'Alarm durumunda sesli uyarı verir. Yakın çevredekilerin dikkatini çekmek için kullanılır.',
+        props: ['Görev: sesli uyarı', 'Tetiklenme: yalnızca alarm kademesinde', 'Ses seviyesi: tasarım aşamasında']
+      },
+      en: {
+        name: 'Buzzer',
+        info: 'Provides an audible alert during an alarm state to draw the attention of people nearby.',
+        props: ['Role: audible alert', 'Trigger: only at the alarm level', 'Volume: under design']
+      }
+    },
+    {
+      id: 'bat', x: 0.37, y: 0.64, w: 0.26, h: 0.16,
+      tr: {
+        name: 'Batarya ve şarj kontrol',
+        info: 'Enerjiyi depolar ve güneş panelinden gelen enerjinin güvenli şekilde şarj edilmesini sağlar.',
+        props: ['Görev: enerji depolama', 'Şarj kontrol: aşırı şarjı önler (kavramsal)', 'Kaynak: güneş paneli']
+      },
+      en: {
+        name: 'Battery & charge ctrl',
+        info: 'Stores energy and safely regulates charging from the solar panel.',
+        props: ['Role: energy storage', 'Charge control: prevents overcharging (conceptual)', 'Source: solar panel']
+      }
+    },
+    {
+      id: 'sun', x: 0.04, y: 0.66, w: 0.24, h: 0.17,
+      tr: {
+        name: 'Güneş paneli',
+        info: 'Cihazın enerji kaynağıdır. Dış ortamda çalışır, bu yüzden dayanıklı olması gerekir.',
+        props: ['Görev: enerji üretimi', 'Konum: kutunun dışında', 'Not: boyutu enerji ihtiyacına göre belirlenir']
+      },
+      en: {
+        name: 'Solar panel',
+        info: 'The energy source of the device. Operates outdoors, so it requires weather durability.',
+        props: ['Role: energy generation', 'Placement: outside the enclosure', 'Note: size depends on power demand']
+      }
+    }
+  ];
+
+  // Her parça için kavramsal SVG görseli (sağ panelde gösterilir)
+  var PART_ICONS = {
+    pm: '<svg viewBox="0 0 200 120" width="100%"><rect x="10" y="20" width="180" height="90" rx="12" fill="#fff" stroke="#14294a" stroke-width="3"/><rect x="50" y="40" width="60" height="50" fill="#dfe6ee" stroke="#14294a" stroke-width="2"/><circle cx="130" cy="65" r="18" fill="none" stroke="#2e7d4f" stroke-width="4"/><circle cx="130" cy="65" r="5" fill="#2e7d4f"/></svg>',
+    env: '<svg viewBox="0 0 200 120" width="100%"><rect x="10" y="20" width="180" height="90" rx="12" fill="#fff" stroke="#14294a" stroke-width="3"/><rect x="60" y="34" width="80" height="62" rx="8" fill="#dcebe0" stroke="#2e7d4f" stroke-width="2"/><path d="M100 48 C88 64 88 74 100 80 C112 74 112 64 100 48Z" fill="#2e7d4f"/></svg>',
+    mcu: '<svg viewBox="0 0 200 120" width="100%"><rect x="20" y="16" width="160" height="88" rx="10" fill="#14294a"/>' + [40,75,110,145].map(function(x){return '<rect x="'+x+'" y="4" width="8" height="14" fill="#14294a"/><rect x="'+x+'" y="102" width="8" height="14" fill="#14294a"/>';}).join('') + '<rect x="70" y="40" width="60" height="40" rx="4" fill="#c9d6e6"/><rect x="82" y="52" width="36" height="16" fill="#14294a"/></svg>',
+    wifi: '<svg viewBox="0 0 200 120" width="100%"><rect x="50" y="50" width="100" height="56" rx="8" fill="#fff" stroke="#14294a" stroke-width="3"/><line x1="100" y1="50" x2="100" y2="12" stroke="#14294a" stroke-width="4"/><circle cx="100" cy="10" r="5" fill="#14294a"/><path d="M70 28 Q100 4 130 28" fill="none" stroke="#2e7d4f" stroke-width="3"/><path d="M80 36 Q100 20 120 36" fill="none" stroke="#2e7d4f" stroke-width="3"/></svg>',
+    led: '<svg viewBox="0 0 200 120" width="100%"><rect x="20" y="30" width="160" height="60" rx="30" fill="#fff" stroke="#14294a" stroke-width="3"/><circle cx="60" cy="60" r="12" fill="#2e7d4f"/><circle cx="100" cy="60" r="12" fill="#c9962a"/><circle cx="140" cy="60" r="12" fill="#b8473b"/></svg>',
+    buz: '<svg viewBox="0 0 200 120" width="100%"><circle cx="100" cy="60" r="40" fill="#fff" stroke="#14294a" stroke-width="3"/><circle cx="100" cy="60" r="16" fill="#14294a"/><path d="M150 40 Q168 60 150 80" fill="none" stroke="#c9962a" stroke-width="4"/><path d="M164 30 Q186 60 164 90" fill="none" stroke="#c9962a" stroke-width="4"/></svg>',
+    bat: '<svg viewBox="0 0 200 120" width="100%"><rect x="20" y="36" width="140" height="48" rx="8" fill="#fff" stroke="#14294a" stroke-width="3"/><rect x="160" y="50" width="10" height="20" fill="#14294a"/><rect x="28" y="44" width="90" height="32" rx="4" fill="#2e7d4f"/><path d="M130 44 L118 62 L128 62 L120 78 L138 56 L128 56 Z" fill="#c9962a"/></svg>',
+    sun: '<svg viewBox="0 0 200 120" width="100%"><g transform="skewX(-12)"><rect x="50" y="26" width="110" height="68" fill="#2e7d4f" stroke="#14294a" stroke-width="3"/>' + [0,1,2].map(function(i){return '<line x1="'+(50+i*37)+'" y1="26" x2="'+(50+i*37)+'" y2="94" stroke="#dcebe0" stroke-width="2"/>';}).join('') + '</g><line x1="105" y1="94" x2="105" y2="112" stroke="#14294a" stroke-width="4"/></svg>'
+  };
+
+  // Parçalar arasındaki bağlantılar: iki dilli veri ve enerji akışları
+  var CONNECTIONS = [
+    {
+      from: 'pm', to: 'mcu',
+      tr: {
+        label: 'PM verisi',
+        type: 'Dijital ölçüm verisi (PM2.5, PM10)',
+        desc: 'PM sensörü ölçtüğü partikül değerlerini mikrodenetleyiciye iletir. Eşik karşılaştırması bu veriyle yapılır.'
+      },
+      en: {
+        label: 'PM data',
+        type: 'Digital measurement data (PM2.5, PM10)',
+        desc: 'The PM sensor sends measured particulate values to the microcontroller for threshold comparison.'
+      }
+    },
+    {
+      from: 'env', to: 'mcu',
+      tr: {
+        label: 'Nem ve sıcaklık',
+        type: 'Dijital çevre verisi',
+        desc: 'Çevresel sensör nem ve sıcaklık değerini gönderir. Bu değerler PM sonuçlarını yorumlamada kullanılır.'
+      },
+      en: {
+        label: 'Humidity & temp',
+        type: 'Digital environmental data',
+        desc: 'The environmental sensor sends humidity and temperature values used to help interpret PM results.'
+      }
+    },
+    {
+      from: 'mcu', to: 'led',
+      tr: {
+        label: 'Durum komutu',
+        type: 'Kademe komutu (yeşil, sarı, kırmızı)',
+        desc: 'Mikrodenetleyici, belirlenen uyarı kademesine göre LED rengini seçer.'
+      },
+      en: {
+        label: 'Status command',
+        type: 'Level command (green, yellow, red)',
+        desc: 'The microcontroller selects the LED color based on the active warning level.'
+      }
+    },
+    {
+      from: 'mcu', to: 'buz',
+      tr: {
+        label: 'Alarm sinyali',
+        type: 'Açma komutu (yalnızca alarm kademesinde)',
+        desc: 'Kirlilik alarm eşiğini aştığında buzzer tetiklenir. Güvenli ve dikkat kademelerinde sessizdir.'
+      },
+      en: {
+        label: 'Alarm signal',
+        type: 'Trigger command (only at alarm level)',
+        desc: 'Triggers the buzzer when pollution exceeds the alarm threshold. Silent during safe and caution levels.'
+      }
+    },
+    {
+      from: 'mcu', to: 'wifi',
+      tr: {
+        label: 'Özet ve uyarı',
+        type: 'Veri paketi',
+        desc: 'Ölçüm özeti ve uyarı durumu, kablosuz modül üzerinden uzaktaki bir sisteme aktarılır.'
+      },
+      en: {
+        label: 'Summary & alert',
+        type: 'Data packet',
+        desc: 'Measurement summaries and alert statuses are transmitted to a remote system via the wireless module.'
+      }
+    },
+    {
+      from: 'bat', to: 'mcu',
+      tr: {
+        label: 'Güç',
+        type: 'Elektrik enerjisi (düşük gerilim korumalı)',
+        desc: 'Batarya, mikrodenetleyici ve sensörleri besler. Gerilim düşerse cihaz koruma moduna geçebilir.'
+      },
+      en: {
+        label: 'Power',
+        type: 'Electrical energy (low-voltage protected)',
+        desc: 'The battery powers the microcontroller and sensors. If voltage drops, the device can enter protection mode.'
+      }
+    },
+    {
+      from: 'sun', to: 'bat',
+      tr: {
+        label: 'Güneş enerjisi',
+        type: 'Elektrik enerjisi (şarj kontrol üzerinden)',
+        desc: 'Güneş paneli ürettiği enerjiyi şarj kontrol devresi üzerinden bataryaya aktarır.'
+      },
+      en: {
+        label: 'Solar energy',
+        type: 'Electrical energy (via charge controller)',
+        desc: 'The solar panel transfers generated energy to the battery through the charge controller circuit.'
+      }
+    }
+  ];
+
+  // Durum mesajları sözlüğü
+  var STATUS_TEXT = {
+    idle: {
+      tr: 'Kamerayı başlatmak için düğmeye basın (veya fareyle parçaların üzerine gelin).',
+      en: 'Press the button to start the camera (or hover over parts with your mouse).'
+    },
+    noSupport: {
+      tr: 'Bu tarayıcı kamerayı desteklemiyor. Fare ile deneyebilirsiniz.',
+      en: 'This browser does not support camera access. You can explore with your mouse.'
+    },
+    waitPerm: {
+      tr: 'Kamera izni bekleniyor...',
+      en: 'Waiting for camera permission...'
+    },
+    camOpenLoading: {
+      tr: 'Kamera açık. El modeli yükleniyor...',
+      en: 'Camera active. Loading hand tracking model...'
+    },
+    modelTimeout: {
+      tr: 'El modeli yüklenemedi. Sayfayı yerel sunucu üzerinden açın veya fare ile deneyin.',
+      en: 'Hand model could not load. Open via a local server or explore with your mouse.'
+    },
+    camDenied: {
+      tr: 'Kamera izni verilmedi ya da kamera bulunamadı. Fare ile deneyebilirsiniz.',
+      en: 'Camera permission denied or no camera found. You can explore with your mouse.'
+    },
+    camStopped: {
+      tr: 'Kamera durduruldu. Yeniden açmak için düğmeye basın veya fare ile keşfedin.',
+      en: 'Camera stopped. Press the button to restart or explore with your mouse.'
+    },
+    searchingHand: {
+      tr: 'El aranıyor. Elinizi kameraya gösterin.',
+      en: 'Looking for hand. Show your hand to the camera.'
+    },
+    handDetected: {
+      tr: 'El algılandı. İşaret parmağınızı bir parçanın üzerine getirin.',
+      en: 'Hand detected. Move your index finger over a part.'
+    },
+    partDetected: {
+      tr: 'Parça algılandı. Kilitlemek için başparmak ile işaret parmağını birleştirin.',
+      en: 'Part detected. Pinch thumb and index finger together to lock.'
+    }
+  };
+  var currentStatusKey = 'idle';
+
+  function setStatusKey(key) {
+    currentStatusKey = key;
+    statusEl.textContent = STATUS_TEXT[key][currentLang];
+  }
+
+  var activeConnId = null;
+  var pinnedConnId = null;
+
+  var hands = null;
+  var running = false;
+  var mouseMode = true; // Kamera başlatılana kadar fare ile de etkileşim açık
+  var lastHands = null;
+  var fingerPos = null;
+  var activeId = null;
+  var pinnedId = null;
+  var pinching = false;
+  var lastShown = '__none__';
+  var camFrame = null;
+  var viewScale = 1;
+  var viewX = 0, viewY = 0;
+  var cameraStream = null;
+  var sending = false;
+  var gotResults = false;
+  var idleAnimId = null;
+
+  function resize() {
+    var box = canvas.parentElement.getBoundingClientRect();
+    if (box.width > 0 && box.height > 0) {
+      canvas.width = Math.round(box.width);
+      canvas.height = Math.round(box.height);
+      W = canvas.width;
+      H = canvas.height;
+      render();
+    }
+  }
+  window.addEventListener('resize', resize);
+
+  function partCenter(p) {
+    return { x: (p.x + p.w / 2) * W, y: (p.y + p.h / 2) * H };
+  }
+
+  function distToSeg(px, py, ax, ay, bx, by) {
+    var dx = bx - ax, dy = by - ay;
+    var L = dx * dx + dy * dy;
+    var t = L ? ((px - ax) * dx + (py - ay) * dy) / L : 0;
+    t = Math.max(0, Math.min(1, t));
+    return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+  }
+
+  function connAt(x, y) {
+    if (x == null || y == null) return null;
+    var best = null, bestD = 18;
+    for (var i = 0; i < CONNECTIONS.length; i++) {
+      var c = CONNECTIONS[i];
+      var a = partCenter(findPart(c.from)), b = partCenter(findPart(c.to));
+      var d = distToSeg(x, y, a.x, a.y, b.x, b.y);
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return best;
+  }
+
+  function drawConnections() {
+    var t0 = (Date.now() % 1600) / 1600;
+    for (var i = 0; i < CONNECTIONS.length; i++) {
+      var c = CONNECTIONS[i];
+      var a = partCenter(findPart(c.from)), b = partCenter(findPart(c.to));
+      var on = i === activeConnId || i === pinnedConnId;
+
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.lineWidth = on ? 6 : 3;
+      ctx.strokeStyle = on ? '#2e7d4f' : 'rgba(255,255,255,0.55)';
+      ctx.stroke();
+
+      for (var k = 0; k < 2; k++) {
+        var t = (t0 + k / 2) % 1;
+        ctx.beginPath();
+        ctx.arc(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, on ? 7 : 4, 0, Math.PI * 2);
+        ctx.fillStyle = on ? '#c9f2d7' : 'rgba(255,255,255,0.85)';
+        ctx.fill();
+      }
+
+      if (on) {
+        var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        var label = c[currentLang].label;
+        ctx.font = 'bold 16px system-ui, Arial, sans-serif';
+        var tw = ctx.measureText(label).width + 20;
+        ctx.fillStyle = 'rgba(20,41,74,0.92)';
+        roundRect(mx - tw / 2, my - 16, tw, 30, 8);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, mx, my - 1);
+      }
+    }
+  }
+
+  function showConn(cid) {
+    var c = CONNECTIONS[cid];
+    var cData = c[currentLang];
+    var from = findPart(c.from)[currentLang];
+    var to = findPart(c.to)[currentLang];
+    var lockText = currentLang === 'tr' ? '(kilitli)' : '(pinned)';
+    var dirLabel = currentLang === 'tr' ? 'Yön: ' : 'Direction: ';
+    var carryLabel = currentLang === 'tr' ? 'Taşınan: ' : 'Carried: ';
+
+    panel.classList.add('open');
+    document.getElementById('pImg').innerHTML = '';
+    pTitle.innerHTML = from.name + ' \u2192 ' + to.name +
+      (pinnedConnId === cid ? ' <span class="pinned-tag">' + lockText + '</span>' : '');
+    pBody.innerHTML = '<p>' + cData.desc + '</p><ul>' +
+      '<li>' + dirLabel + from.name + ' \u2192 ' + to.name + '</li>' +
+      '<li>' + carryLabel + cData.type + '</li></ul>';
+  }
+
+  function partAt(x, y) {
+    for (var i = 0; i < PARTS.length; i++) {
+      var p = PARTS[i];
+      if (x >= p.x * W && x <= (p.x + p.w) * W && y >= p.y * H && y <= (p.y + p.h) * H) return p.id;
+    }
+    return null;
+  }
+
+  function findPart(id) {
+    for (var i = 0; i < PARTS.length; i++) if (PARTS[i].id === id) return PARTS[i];
+    return null;
+  }
+
+  function showInfo(id, forceRefresh) {
+    var cid = activeConnId !== null ? activeConnId : pinnedConnId;
+    var key = currentLang + '|' + (id || '') + '|' + (pinnedId || '') + '|c' + (cid === null ? '' : cid);
+    if (!forceRefresh && key === lastShown) return;
+    lastShown = key;
+
+    if (cid !== null && cid !== undefined) {
+      showConn(cid);
+      return;
+    }
+    var p = findPart(id);
+    panel.classList.toggle('open', !!p);
+    if (!p) {
+      document.getElementById('pImg').innerHTML = '';
+      pTitle.textContent = currentLang === 'tr' ? 'Bir parça seçin' : 'Select a component';
+      pBody.innerHTML = currentLang === 'tr'
+        ? '<p class="empty">Elinizi gösterin ve işaret parmağınızı bir parçanın üzerine getirin.</p>'
+        : '<p class="empty">Show your hand and move your index finger over a component.</p>';
+      return;
+    }
+    var pData = p[currentLang];
+    var lockText = currentLang === 'tr' ? '(kilitli)' : '(pinned)';
+    document.getElementById('pImg').innerHTML = PART_ICONS[p.id] || '';
+    pTitle.innerHTML = pData.name + (pinnedId === p.id ? ' <span class="pinned-tag">' + lockText + '</span>' : '');
+    var html = '<p>' + pData.info + '</p><ul>';
+    for (var i = 0; i < pData.props.length; i++) html += '<li>' + pData.props[i] + '</li>';
+    html += '</ul>';
+    pBody.innerHTML = html;
+  }
+
+  function drawCameraBackground(src) {
+    var sw = src.videoWidth || src.width || W;
+    var sh = src.videoHeight || src.height || H;
+    var base = Math.max(W / sw, H / sh);
+    var bw = sw * base, bh = sh * base;
+    var dw = bw * viewScale, dh = bh * viewScale;
+    var maxPanX = Math.max(0, (dw - W) / 2), maxPanY = Math.max(0, (dh - H) / 2);
+    viewX = Math.max(-maxPanX, Math.min(maxPanX, viewX));
+    viewY = Math.max(-maxPanY, Math.min(maxPanY, viewY));
+    var left = W / 2 + viewX - dw / 2;
+    var top = H / 2 + viewY - dh / 2;
+    ctx.save();
+    ctx.translate(W, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(src, W - (left + dw), top, dw, dh);
+    ctx.restore();
+    ctx.fillStyle = 'rgba(13,22,36,0.25)';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawParts() {
+    var fontSize = Math.max(13, Math.round(W * 0.022));
+    for (var i = 0; i < PARTS.length; i++) {
+      var p = PARTS[i];
+      var x = p.x * W, y = p.y * H, w = p.w * W, h = p.h * H;
+      var isActive = p.id === activeId;
+      var isPinned = p.id === pinnedId;
+
+      roundRect(x, y, w, h, 14);
+      ctx.fillStyle = isPinned ? 'rgba(46,125,79,0.72)'
+                    : isActive ? 'rgba(46,125,79,0.56)'
+                    : 'rgba(20,41,74,0.62)';
+      ctx.fill();
+      ctx.lineWidth = isActive || isPinned ? 4 : 2;
+      ctx.strokeStyle = isPinned ? '#c9f2d7' : isActive ? '#9fe0b8' : 'rgba(255,255,255,0.75)';
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold ' + fontSize + 'px system-ui, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p[currentLang].name, x + w / 2, y + h / 2);
+    }
+    drawCallout();
+  }
+
+  function wrapText(text, maxWidth, font) {
+    ctx.font = font;
+    var words = text.split(' ');
+    var lines = [], line = '';
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = words[i];
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function drawCallout() {
+    var id = activeId || pinnedId;
+    var p = findPart(id);
+    if (!p) return;
+    var pData = p[currentLang];
+    var lockTag = currentLang === 'tr' ? '  (kilitli)' : '  (pinned)';
+    var x = p.x * W, y = p.y * H, w = p.w * W, h = p.h * H;
+    var boxW = Math.min(340, W * 0.44), pad = 14;
+    var titleFont = 'bold 18px system-ui, Arial, sans-serif';
+    var bodyFont = '14.5px system-ui, Arial, sans-serif';
+    var bodyLines = wrapText(pData.info, boxW - pad * 2, bodyFont).slice(0, 4);
+    var titleText = pData.name + (pinnedId === p.id ? lockTag : '');
+    var boxH = pad * 2 + 25 + bodyLines.length * 19;
+
+    var bx = x + w + 16;
+    if (bx + boxW > W - 10) bx = x - boxW - 16;
+    if (bx < 10) bx = 10;
+    var by = y + h / 2 - boxH / 2;
+    by = Math.max(10, Math.min(H - boxH - 10, by));
+
+    ctx.save();
+    roundRect(bx, by, boxW, boxH, 12);
+    ctx.fillStyle = 'rgba(255,255,255,0.96)';
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#2e7d4f';
+    ctx.stroke();
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#14294a';
+    ctx.font = titleFont;
+    ctx.fillText(titleText, bx + pad, by + pad);
+
+    ctx.fillStyle = '#1c2a3a';
+    ctx.font = bodyFont;
+    for (var i = 0; i < bodyLines.length; i++) {
+      ctx.fillText(bodyLines[i], bx + pad, by + pad + 25 + i * 19);
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    var cx = bx < x ? x : x + w;
+    ctx.moveTo(cx, y + h / 2);
+    ctx.lineTo(bx < x ? bx + boxW : bx, by + boxH / 2);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#c9f2d7';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawHand(lm) {
+    var pts = lm.map(function (p) { return { x: (1 - p.x) * W, y: p.y * H }; });
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.beginPath();
+    HAND_LINKS.forEach(function (l) {
+      ctx.moveTo(pts[l[0]].x, pts[l[0]].y);
+      ctx.lineTo(pts[l[1]].x, pts[l[1]].y);
+    });
+    ctx.stroke();
+    for (var i = 0; i < pts.length; i++) {
+      ctx.beginPath();
+      ctx.arc(pts[i].x, pts[i].y, i === 8 || i === 4 ? 9 : 5, 0, Math.PI * 2);
+      ctx.fillStyle = i === 8 ? '#9fe0b8' : (i === 4 ? '#c9f2d7' : '#ffffff');
+      ctx.fill();
+    }
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    if (camFrame) {
+      drawCameraBackground(camFrame);
+    } else {
+      ctx.fillStyle = '#0d1624';
+      ctx.fillRect(0, 0, W, H);
+    }
+    drawConnections();
+    drawParts();
+    if (lastHands && lastHands.length) {
+      for (var k = 0; k < lastHands.length; k++) drawHand(lastHands[k]);
+    }
+
+    if (fingerPos) {
+      ctx.beginPath();
+      ctx.arc(fingerPos.x, fingerPos.y, pinching ? 14 : 10, 0, Math.PI * 2);
+      ctx.fillStyle = pinching ? '#2e7d4f' : '#ffffff';
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#14294a';
+      ctx.stroke();
+    }
+  }
+
+  function stopCamera() {
+    running = false;
+    mouseMode = true;
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(function (t) { t.stop(); });
+      cameraStream = null;
+    }
+    video.srcObject = null;
+    hands = null;
+    camFrame = null;
+    lastHands = null;
+    fingerPos = null;
+    activeId = null;
+    pinching = false;
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    setStatusKey('camStopped');
+    render();
+    showInfo(pinnedId, true);
+    startIdleLoop();
+  }
+
+  function processHandResults(results) {
+    gotResults = true;
+    camFrame = results.image || camFrame;
+    var lms = results.multiHandLandmarks;
+    lastHands = lms && lms.length ? lms : null;
+
+    if (!lastHands) {
+      fingerPos = null;
+      pinching = false;
+      activeId = null;
+      activeConnId = null;
+      setStatusKey('searchingHand');
+      render();
+      showInfo(pinnedId);
+      return;
+    }
+
+    var found = null, anyOpen = false, firstTip = null;
+    var pinchPts = [];
+    var pinchPrevState = pinching;
+    for (var h = 0; h < lastHands.length; h++) {
+      var lmh = lastHands[h];
+      var tipH = lmh[8], thumbH = lmh[4];
+      var pos = { x: (1 - tipH.x) * W, y: tipH.y * H };
+      if (!firstTip) firstTip = pos;
+      var ddx = tipH.x - thumbH.x, ddy = tipH.y - thumbH.y;
+      var dd = Math.sqrt(ddx * ddx + ddy * ddy);
+      if (dd < 0.05) {
+        pinchPts.push({
+          x: ((1 - tipH.x) + (1 - thumbH.x)) / 2 * W,
+          y: (tipH.y + thumbH.y) / 2 * H
+        });
+      }
+      if (lmh[12].y < lmh[10].y && lmh[16].y < lmh[14].y && lmh[20].y < lmh[18].y && dd > 0.12) anyOpen = true;
+      var under2 = partAt(pos.x, pos.y);
+      if (under2 && !found) found = under2;
+    }
+    fingerPos = firstTip;
+
+    if (pinchPts.length === 1 && !pinchPrevState) {
+      var pp = pinchPts[0];
+      var pu = partAt(pp.x, pp.y);
+      var pc = pu ? null : connAt(pp.x, pp.y);
+      if (pu) {
+        pinnedId = pinnedId === pu ? null : pu;
+        pinnedConnId = null;
+      } else if (pc !== null) {
+        pinnedConnId = pinnedConnId === pc ? null : pc;
+        pinnedId = null;
+      }
+    }
+    if (anyOpen) { pinnedId = null; pinnedConnId = null; }
+    pinching = pinchPts.length === 1;
+    activeId = found;
+    activeConnId = found ? null : connAt(fingerPos ? fingerPos.x : null, fingerPos ? fingerPos.y : null);
+    setStatusKey(activeId ? 'partDetected' : 'handDetected');
+    render();
+    showInfo(activeId || pinnedId);
+  }
+
+  function frameLoop() {
+    if (!running) return;
+    if (video.readyState >= 2) camFrame = video;
+    if (!mouseMode && hands && video.readyState >= 2 && !sending) {
+      sending = true;
+      hands.send({ image: video })
+        .then(function () { sending = false; })
+        .catch(function () { sending = false; });
+    }
+    render();
+    requestAnimationFrame(frameLoop);
+  }
+
+  function startIdleLoop() {
+    if (idleAnimId) cancelAnimationFrame(idleAnimId);
+    function tick() {
+      if (running) return;
+      render();
+      idleAnimId = requestAnimationFrame(tick);
+    }
+    idleAnimId = requestAnimationFrame(tick);
+  }
+
+  function initHands() {
+    if (typeof Hands === 'undefined') {
+      setStatusKey('modelTimeout');
+      mouseMode = true;
+      return false;
+    }
+    hands = new Hands({
+      locateFile: function (file) {
+        return 'https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/' + file;
+      }
+    });
+    hands.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.6,
+      minTrackingConfidence: 0.5
+    });
+    hands.onResults(processHandResults);
+    return true;
+  }
+
+  function startCamera() {
+    startBtn.disabled = true;
+    gotResults = false;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setStatusKey('noSupport');
+      mouseMode = true;
+      startBtn.disabled = false;
+      return;
+    }
+    setStatusKey('waitPerm');
+    navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, facingMode: 'user' }, audio: false })
+      .then(function (stream) {
+        cameraStream = stream;
+        video.srcObject = stream;
+        return video.play();
+      })
+      .then(function () {
+        var ok = initHands();
+        mouseMode = !ok;
+        running = true;
+        stopBtn.disabled = false;
+        if (ok) {
+          setStatusKey('camOpenLoading');
+          setTimeout(function () {
+            if (running && !gotResults) {
+              setStatusKey('modelTimeout');
+              mouseMode = true;
+            }
+          }, 8000);
+        }
+        frameLoop();
+      })
+      .catch(function () {
+        setStatusKey('camDenied');
+        mouseMode = true;
+        running = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      });
+  }
+
+  startBtn.addEventListener('click', startCamera);
+  stopBtn.addEventListener('click', stopCamera);
+
+  // Fare ile deneme (kamera kapalıyken veya desteklenmiyorsa)
+  function canvasPoint(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) };
+  }
+
+  canvas.addEventListener('mousemove', function (e) {
+    if (!mouseMode) return;
+    fingerPos = canvasPoint(e);
+    activeId = partAt(fingerPos.x, fingerPos.y);
+    activeConnId = activeId ? null : connAt(fingerPos.x, fingerPos.y);
+    render();
+    showInfo(activeId || pinnedId);
+  });
+
+  canvas.addEventListener('mouseleave', function () {
+    if (!mouseMode) return;
+    fingerPos = null;
+    activeId = null;
+    activeConnId = null;
+    render();
+    showInfo(pinnedId);
+  });
+
+  canvas.addEventListener('click', function (e) {
+    if (!mouseMode) return;
+    var p = canvasPoint(e);
+    var id = partAt(p.x, p.y);
+    if (id) {
+      pinnedId = pinnedId === id ? null : id;
+      pinnedConnId = null;
+    } else {
+      var cc = connAt(p.x, p.y);
+      if (cc !== null) {
+        pinnedConnId = pinnedConnId === cc ? null : cc;
+        pinnedId = null;
+      }
+    }
+    render();
+    showInfo(activeId || pinnedId, true);
+  });
+
+  // Dil seçimi
+  var root = document.documentElement;
+  var btnTr = document.getElementById('btn-tr');
+  var btnEn = document.getElementById('btn-en');
+
+  function setLang(lang) {
+    currentLang = lang;
+    root.setAttribute('lang', lang);
+    btnTr.setAttribute('aria-pressed', lang === 'tr' ? 'true' : 'false');
+    btnEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    document.title = lang === 'tr'
+      ? 'Kentsel Trafik ve İnce Partikül Madde | Kavramsal Erken Uyarı Cihazı'
+      : 'Urban Traffic and Fine Particulate Matter | Conceptual Early Warning Device';
+    setStatusKey(currentStatusKey);
+    render();
+    showInfo(activeId || pinnedId, true);
+  }
+
+  btnTr.addEventListener('click', function () { setLang('tr'); });
+  btnEn.addEventListener('click', function () { setLang('en'); });
+
+  // Sunum (slayt) kontrolleri
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var dotsWrap = document.getElementById('dots');
+  var counter = document.getElementById('counter');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var current = 0;
+
+  slides.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', (i + 1) + '. slayt');
+    b.addEventListener('click', function () { showSlide(i); });
+    dotsWrap.appendChild(b);
+  });
+
+  function showSlide(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach(function (s, idx) {
+      s.classList.toggle('active', idx === current);
+    });
+    Array.prototype.forEach.call(dotsWrap.children, function (d, idx) {
+      d.setAttribute('aria-current', idx === current ? 'true' : 'false');
+    });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  prevBtn.addEventListener('click', function () { showSlide(current - 1); });
+  nextBtn.addEventListener('click', function () { showSlide(current + 1); });
+
+  document.addEventListener('keydown', function (e) {
+    var deck = document.getElementById('deck');
+    var r = deck.getBoundingClientRect();
+    var inView = r.top < window.innerHeight && r.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowRight') showSlide(current + 1);
+    if (e.key === 'ArrowLeft') showSlide(current - 1);
+  });
+
+  // Başlangıç
+  resize();
+  setStatusKey('idle');
+  showInfo(null, true);
+  showSlide(0);
+  startIdleLoop();
+})();
+</script>
+
+</body>
+</html>
